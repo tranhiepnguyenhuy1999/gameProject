@@ -32,6 +32,7 @@
 #include "Goomba.h"
 #include "BatTrap.h"
 #include "EnemyBall.h"
+#include "Map.h"
 
 #define WINDOW_CLASS_NAME L"SampleWindow"
 #define MAIN_WINDOW_TITLE L"04 - Collision"
@@ -46,6 +47,7 @@
 #define ID_TEX_ENEMY 10
 #define ID_TEX_MISC 20
 #define ID_TEX_NES_ENEMY 30
+#define ID_TEX_MAP 40
 CGame *game;
 
 CMario *mario;
@@ -119,17 +121,19 @@ void LoadResources()
 {
 	CTextures * textures = CTextures::GetInstance();
 
+	textures->Add(ID_TEX_MAP, L"textures\\level3-side.png", D3DCOLOR_XRGB(255, 255, 255));
 	textures->Add(ID_TEX_MARIO, L"textures\\mario.png",D3DCOLOR_XRGB(255, 255, 255));
 	textures->Add(ID_TEX_MISC, L"textures\\misc.png", D3DCOLOR_XRGB(176, 224, 248));
 	textures->Add(ID_TEX_ENEMY, L"textures\\enemies.png", D3DCOLOR_XRGB(3, 26, 110));
 	textures->Add(ID_TEX_NES_ENEMY, L"textures\\NESBlaster MasterEnemies.png", D3DCOLOR_XRGB(3, 26, 110));
-
-
 	textures->Add(ID_TEX_BBOX, L"textures\\bbox.png", D3DCOLOR_XRGB(255, 255, 255));
-
 
 	CSprites * sprites = CSprites::GetInstance();
 	CAnimations * animations = CAnimations::GetInstance();
+
+	// map 
+	LPDIRECT3DTEXTURE9 texMap = textures->Get(ID_TEX_MAP);
+	sprites->Add(00001, 0, 0, 320, 240, texMap);
 	
 	LPDIRECT3DTEXTURE9 texMario = textures->Get(ID_TEX_MARIO);
 
@@ -236,6 +240,10 @@ void LoadResources()
 	ani->Add(20001);
 	animations->Add(601, ani);
 
+	ani = new CAnimation(100);		// map
+	ani->Add(00001);
+	animations->Add(001, ani);
+
 	//ani = new CAnimation(300);		// Goomba walk
 	//ani->Add(30001);
 	//ani->Add(30002);
@@ -261,6 +269,11 @@ void LoadResources()
 	ani = new CAnimation(1000);		// Goomba dead
 	ani->Add(30003);
 	animations->Add(702, ani);
+
+	Map *map = new Map();			//Map
+	map->AddAnimation(001);
+	map->SetPosition(0, 0);
+	objects.push_back(map);
 
 	mario = new CMario();
 	mario->AddAnimation(400);		// idle right big
@@ -358,9 +371,6 @@ void Update(DWORD dt)
 	float cx, cy;
 
 	mario->GetPosition(cx, cy);
-
-	cx -= SCREEN_WIDTH / 2;
-	cy -= SCREEN_HEIGHT / 2;
 
 	CGame::GetInstance()->SetCamPos(cx, 0.0f /*cy*/);
 }

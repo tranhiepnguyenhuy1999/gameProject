@@ -48,6 +48,21 @@
     <ClInclude Include="ShipE.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="BoomE.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BugE.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Sofia.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Map.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ScreenManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="debug.cpp">
@@ -84,6 +99,21 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ShipE.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BoomE.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BugE.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Sofia.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Map.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ScreenManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

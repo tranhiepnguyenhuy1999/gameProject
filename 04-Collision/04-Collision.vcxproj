@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -130,28 +130,38 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="BatTrap.h" />
+    <ClInclude Include="BoomE.h" />
     <ClInclude Include="Brick.h" />
+    <ClInclude Include="BugE.h" />
     <ClInclude Include="debug.h" />
     <ClInclude Include="EnemyBall.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Goomba.h" />
+    <ClInclude Include="Map.h" />
     <ClInclude Include="Mario.h" />
+    <ClInclude Include="ScreenManager.h" />
     <ClInclude Include="ShipE.h" />
+    <ClInclude Include="Sofia.h" />
     <ClInclude Include="Sprites.h" />
     <ClInclude Include="Textures.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BatTrap.cpp" />
+    <ClCompile Include="BoomE.cpp" />
     <ClCompile Include="Brick.cpp" />
+    <ClCompile Include="BugE.cpp" />
     <ClCompile Include="debug.cpp" />
     <ClCompile Include="EnemyBall.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Goomba.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Map.cpp" />
     <ClCompile Include="Mario.cpp" />
+    <ClCompile Include="ScreenManager.cpp" />
     <ClCompile Include="ShipE.cpp" />
+    <ClCompile Include="Sofia.cpp" />
     <ClCompile Include="Sprites.cpp" />
     <ClCompile Include="Textures.cpp" />
   </ItemGroup>
