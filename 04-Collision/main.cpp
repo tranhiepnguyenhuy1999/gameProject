@@ -26,6 +26,7 @@
 #include "Game.h"
 #include "GameObject.h"
 #include "Textures.h"
+#include "ScreenManager.h"
 
 #include "Mario.h"
 #include "Brick.h"
@@ -133,7 +134,7 @@ void LoadResources()
 
 	// map 
 	LPDIRECT3DTEXTURE9 texMap = textures->Get(ID_TEX_MAP);
-	sprites->Add(00001, 0, 0, 320, 240, texMap);
+	sprites->Add(00001, 0, 0, 2048, 2048, texMap);
 	
 	LPDIRECT3DTEXTURE9 texMario = textures->Get(ID_TEX_MARIO);
 
@@ -372,7 +373,9 @@ void Update(DWORD dt)
 
 	mario->GetPosition(cx, cy);
 
-	CGame::GetInstance()->SetCamPos(cx, 0.0f /*cy*/);
+	ScreenManager::GetInstance()->setScreenManagerPosition(cx, 0.0f);
+	//CGame::GetInstance()->SetCamPos(cx, 0.0f /*cy*/);
+
 }
 
 /*

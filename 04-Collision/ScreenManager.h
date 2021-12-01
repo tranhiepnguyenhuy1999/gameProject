@@ -1,13 +1,17 @@
 #pragma once
-#include "Position.h"
 #include <d3dx9.h>
+
 class ScreenManager
 {
-public:
-	ScreenManager();
-	~ScreenManager();
+	static ScreenManager * __instance;
 
-	D3DXVECTOR3 transformPosition();
+	float xS;
+	float yS;
+
+	public:
+	static ScreenManager * GetInstance();
+	D3DXVECTOR3 transformPosition(float x, float y);
+	void setScreenManagerPosition(float x, float y) { xS = x; yS = y;}
 
 };
 

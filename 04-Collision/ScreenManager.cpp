@@ -1,19 +1,17 @@
 #include "ScreenManager.h"
+ScreenManager * ScreenManager::__instance = NULL;
 
-
-
-ScreenManager::ScreenManager()
+ScreenManager *ScreenManager::GetInstance()
 {
+	if (__instance == NULL) __instance = new ScreenManager();
+	return __instance;
 }
 
-
-ScreenManager::~ScreenManager()
+D3DXVECTOR3 ScreenManager::transformPosition(float x, float y)
 {
-}
-
-D3DXVECTOR3 ScreenManager::transformPosition()
-{
-	D3DXVECTOR3 p(0, 0, 0);
+	int xx = x - xS;
+	int yy = y - yS;
+	
+	D3DXVECTOR3 p(xx, yy, 0);
 	return p;
-
 }
