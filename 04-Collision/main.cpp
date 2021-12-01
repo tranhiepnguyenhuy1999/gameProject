@@ -34,6 +34,7 @@
 #include "BatTrap.h"
 #include "EnemyBall.h"
 #include "Map.h"
+#include "Sophia.h"
 
 #define WINDOW_CLASS_NAME L"SampleWindow"
 #define MAIN_WINDOW_TITLE L"04 - Collision"
@@ -49,6 +50,8 @@
 #define ID_TEX_MISC 20
 #define ID_TEX_NES_ENEMY 30
 #define ID_TEX_MAP 40
+#define ID_TEX_PLAYER 50
+
 CGame *game;
 
 CMario *mario;
@@ -123,11 +126,13 @@ void LoadResources()
 	CTextures * textures = CTextures::GetInstance();
 
 	textures->Add(ID_TEX_MAP, L"textures\\level3-side.png", D3DCOLOR_XRGB(255, 255, 255));
+	textures->Add(ID_TEX_PLAYER, L"textures\\player.png", D3DCOLOR_XRGB(0, 57, 115));
 	textures->Add(ID_TEX_MARIO, L"textures\\mario.png",D3DCOLOR_XRGB(255, 255, 255));
 	textures->Add(ID_TEX_MISC, L"textures\\misc.png", D3DCOLOR_XRGB(176, 224, 248));
 	textures->Add(ID_TEX_ENEMY, L"textures\\enemies.png", D3DCOLOR_XRGB(3, 26, 110));
 	textures->Add(ID_TEX_NES_ENEMY, L"textures\\NESBlaster MasterEnemies.png", D3DCOLOR_XRGB(3, 26, 110));
 	textures->Add(ID_TEX_BBOX, L"textures\\bbox.png", D3DCOLOR_XRGB(255, 255, 255));
+
 
 	CSprites * sprites = CSprites::GetInstance();
 	CAnimations * animations = CAnimations::GetInstance();
@@ -176,8 +181,29 @@ void LoadResources()
 	sprites->Add(40001, 5, 14, 21, 29, texNESEnemy);
 	sprites->Add(40002, 25, 14, 41, 29, texNESEnemy);
 
-	//sprites->Add(40003, 75, 1485, 100, 1505, texNESEnemy); // BatTrap static sprite
-	sprites->Add(40003, 78, 385, 98, 405, texNESEnemy); // BatTrap static sprite
+	sprites->Add(40003, 75, 1485, 100, 1505, texNESEnemy); // BatTrap static sprite
+
+	LPDIRECT3DTEXTURE9 texPlayer = textures->Get(ID_TEX_PLAYER);
+
+	sprites->Add(99001, 3, 12, 11, 20, texPlayer); // than xe
+
+	sprites->Add(99002, 3, 21 , 11, 29, texPlayer); // banh xe 1
+	sprites->Add(99003, 12, 21, 20, 29, texPlayer); // banh xe 2
+	sprites->Add(99004, 21, 21, 29, 29, texPlayer); // banh xe 3
+	sprites->Add(99005, 30, 21, 38, 29, texPlayer); // banh xe 4
+
+	sprites->Add(99006, 3, 3, 11, 11, texPlayer); // sung 1
+	sprites->Add(99007, 12, 3, 20, 11, texPlayer); // sung 2
+	sprites->Add(99008, 21, 3, 29, 11, texPlayer); // sung 3
+	sprites->Add(99009, 30, 3, 38, 11, texPlayer); // sung 4
+
+	sprites->Add(99010, 39, 3, 55, 11, texPlayer); // khung 1
+	sprites->Add(99011, 56, 3, 72, 11, texPlayer); // khung 2
+
+	sprites->Add(99012, 73 , 3, 89, 19, texPlayer); // khung 3
+	sprites->Add(99013, 90, 3, 98, 19, texPlayer); // khung 4
+	sprites->Add(99014, 99, 3, 107, 19, texPlayer); // khung 5
+	sprites->Add(99015, 108, 3, 124, 19, texPlayer); // khung 5
 
 	// enemyball
 
@@ -267,6 +293,26 @@ void LoadResources()
 	ani->Add(50012);
 	animations->Add(901, ani);
 
+	ani = new CAnimation(200);		// sophia point
+	ani->Add(99001);
+	animations->Add(1001, ani);
+
+	ani = new CAnimation(200);		// sophia banh xe
+	ani->Add(99002);
+	animations->Add(1002, ani);
+
+	ani = new CAnimation(200);		// 
+	ani->Add(99003);
+	animations->Add(1003, ani);
+
+	ani = new CAnimation(200);		// sophia gun
+	ani->Add(99006);
+	animations->Add(1004, ani);
+
+	ani = new CAnimation(200);		// sophia body
+	ani->Add(99010);
+	animations->Add(1005, ani);
+
 	ani = new CAnimation(1000);		// Goomba dead
 	ani->Add(30003);
 	animations->Add(702, ani);
@@ -312,6 +358,7 @@ void LoadResources()
 	//}
 
 
+
 	for (int i = 0; i < 30; i++)
 	{
 		CBrick *brick = new CBrick();
@@ -322,8 +369,17 @@ void LoadResources()
 
 	BatTrap *batTrap = new BatTrap();
 	batTrap->AddAnimation(801);
-	batTrap->SetPosition(0, 30.0f);
+	batTrap->SetPosition(70.0f, 30.0f);
 	objects.push_back(batTrap);
+
+	Sophia *sophia = new Sophia();
+	sophia->AddAnimation(1001);
+	sophia->AddAnimation(1002);
+	sophia->AddAnimation(1003);
+	sophia->AddAnimation(1004);
+	sophia->AddAnimation(1005);
+	sophia->SetPosition(100.0f, 30.0f);
+	objects.push_back(sophia);
 
 	EnemyBall *enemyBall = new EnemyBall();
 	enemyBall->AddAnimation(901);

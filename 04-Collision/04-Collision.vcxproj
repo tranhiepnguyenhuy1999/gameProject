@@ -142,7 +142,7 @@
     <ClInclude Include="Mario.h" />
     <ClInclude Include="ScreenManager.h" />
     <ClInclude Include="ShipE.h" />
-    <ClInclude Include="Sofia.h" />
+    <ClInclude Include="Sophia.h" />
     <ClInclude Include="Sprites.h" />
     <ClInclude Include="Textures.h" />
   </ItemGroup>
@@ -161,7 +161,7 @@
     <ClCompile Include="Mario.cpp" />
     <ClCompile Include="ScreenManager.cpp" />
     <ClCompile Include="ShipE.cpp" />
-    <ClCompile Include="Sofia.cpp" />
+    <ClCompile Include="Sophia.cpp" />
     <ClCompile Include="Sprites.cpp" />
     <ClCompile Include="Textures.cpp" />
   </ItemGroup>
