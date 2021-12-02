@@ -39,7 +39,7 @@ void Sophia::Render()
 	animations[3]->Render(x+9, y-8);
 	animations[4]->Render(x -8, y-8);
 
-	//RenderBoundingBox();
+	RenderBoundingBox();
 }
 
 void Sophia::SetState(int state)

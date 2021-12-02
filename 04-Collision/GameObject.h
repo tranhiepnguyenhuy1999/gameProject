@@ -16,6 +16,7 @@ typedef CGameObject * LPGAMEOBJECT;
 
 struct CCollisionEvent;
 typedef CCollisionEvent * LPCOLLISIONEVENT;
+
 struct CCollisionEvent
 {
 	LPGAMEOBJECT obj;

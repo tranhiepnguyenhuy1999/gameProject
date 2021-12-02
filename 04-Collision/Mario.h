@@ -26,11 +26,19 @@
 
 #define MARIO_ANI_DIE				8
 
+#define CENTER_ANI_WALKING			0
+#define FONT_WHEEL_ANI_WALKING		1
+#define BACK_WHEEL_ANI_WALKING		2
+#define FONT_WHEEL_ANI_WALKING		1
+#define BACK_WHEEL_ANI_WALKING		2	
+#define GUN_ANI_WALKING				3
+#define BODY_ANI_WALKING			4
+
 #define	MARIO_LEVEL_SMALL	1
 #define	MARIO_LEVEL_BIG		2
 
-#define MARIO_BIG_BBOX_WIDTH  15
-#define MARIO_BIG_BBOX_HEIGHT 27
+#define MARIO_BIG_BBOX_WIDTH  24
+#define MARIO_BIG_BBOX_HEIGHT 16
 
 #define MARIO_SMALL_BBOX_WIDTH  13
 #define MARIO_SMALL_BBOX_HEIGHT 15
@@ -43,6 +51,7 @@ class CMario : public CGameObject
 	int level;
 	int untouchable;
 	DWORD untouchable_start;
+
 public: 
 	CMario() : CGameObject()
 	{

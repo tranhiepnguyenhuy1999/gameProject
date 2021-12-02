@@ -9,7 +9,7 @@ ScreenManager *ScreenManager::GetInstance()
 
 D3DXVECTOR3 ScreenManager::transformPosition(float x, float y)
 {
-	int xx = x - xS;
+	int xx = x - xS + 30.0f;
 	int yy = y - yS;
 	
 	D3DXVECTOR3 p(xx, yy, 0);

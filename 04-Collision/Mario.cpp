@@ -49,6 +49,7 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		if (nx!=0) vx = 0;
 		if (ny!=0) vy = 0;
 
+
 		// Collision logic with Goombas
 		for (UINT i = 0; i < coEventsResult.size(); i++)
 		{
@@ -93,7 +94,15 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 
 void CMario::Render()
 {
-	int ani;
+
+	int ani, center, font_wheel, back_wheel, gun, body;
+
+	center = CENTER_ANI_WALKING;
+	font_wheel = FONT_WHEEL_ANI_WALKING;
+	back_wheel = BACK_WHEEL_ANI_WALKING;
+	gun = GUN_ANI_WALKING;
+	body = BODY_ANI_WALKING;
+
 	if (state == MARIO_STATE_DIE)
 		ani = MARIO_ANI_DIE;
 	else
@@ -122,7 +131,14 @@ void CMario::Render()
 
 	int alpha = 255;
 	if (untouchable) alpha = 128;
-	animations[ani]->Render(x, y, alpha);
+
+	/*animations[ani]->Render(x, y, alpha);*/
+
+	animations[center]->Render(x + 8, y + 8);
+	animations[font_wheel]->Render(x, y + 8);
+	animations[back_wheel]->Render(x +16 , y +8);
+	animations[gun]->Render(x +16, y);
+	animations[body]->Render(x, y);
 
 	RenderBoundingBox();
 }

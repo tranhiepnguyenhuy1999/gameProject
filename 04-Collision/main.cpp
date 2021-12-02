@@ -35,6 +35,7 @@
 #include "EnemyBall.h"
 #include "Map.h"
 #include "Sophia.h"
+#include "Bullet.h"
 
 #define WINDOW_CLASS_NAME L"SampleWindow"
 #define MAIN_WINDOW_TITLE L"04 - Collision"
@@ -56,6 +57,7 @@ CGame *game;
 
 CMario *mario;
 CGoomba *goomba;
+CBrick *brick;
 
 vector<LPGAMEOBJECT> objects;
 
@@ -165,10 +167,8 @@ void LoadResources()
 	sprites->Add(10032, 155, 0, 170, 15, texMario);			// walk
 	sprites->Add(10033, 125, 0, 139, 15, texMario);			// 
 
-	
 	//brick
-	LPDIRECT3DTEXTURE9 texMisc = textures->Get(ID_TEX_MISC);
-	sprites->Add(20001, 408, 225, 424, 241, texMisc);
+	sprites->Add(20001, 128, 64, 144, 80, texMap);
 
 
 	//LPDIRECT3DTEXTURE9 texEnemy = textures->Get(ID_TEX_ENEMY);
@@ -185,25 +185,33 @@ void LoadResources()
 
 	LPDIRECT3DTEXTURE9 texPlayer = textures->Get(ID_TEX_PLAYER);
 
-	sprites->Add(99001, 3, 12, 11, 20, texPlayer); // than xe
+	sprites->Add(98001, 91, 21, 112, 28, texPlayer); // bullet
 
-	sprites->Add(99002, 3, 21 , 11, 29, texPlayer); // banh xe 1
-	sprites->Add(99003, 12, 21, 20, 29, texPlayer); // banh xe 2
-	sprites->Add(99004, 21, 21, 29, 29, texPlayer); // banh xe 3
-	sprites->Add(99005, 30, 21, 38, 29, texPlayer); // banh xe 4
+	sprites->Add(98005, 140, 101, 148, 109, texPlayer); // explore 1
+	sprites->Add(98006, 149, 97, 165, 113, texPlayer);	// explore 2
+	sprites->Add(98007, 166, 97, 182, 113, texPlayer);	// explore 3
+	sprites->Add(98008, 183, 93, 207, 117, texPlayer);	// explore 4
 
-	sprites->Add(99006, 3, 3, 11, 11, texPlayer); // sung 1
-	sprites->Add(99007, 12, 3, 20, 11, texPlayer); // sung 2
-	sprites->Add(99008, 21, 3, 29, 11, texPlayer); // sung 3
-	sprites->Add(99009, 30, 3, 38, 11, texPlayer); // sung 4
 
-	sprites->Add(99010, 39, 3, 55, 11, texPlayer); // khung 1
-	sprites->Add(99011, 56, 3, 72, 11, texPlayer); // khung 2
+	sprites->Add(99001, 3, 12, 11, 20, texPlayer);		// than xe
 
-	sprites->Add(99012, 73 , 3, 89, 19, texPlayer); // khung 3
-	sprites->Add(99013, 90, 3, 98, 19, texPlayer); // khung 4
-	sprites->Add(99014, 99, 3, 107, 19, texPlayer); // khung 5
-	sprites->Add(99015, 108, 3, 124, 19, texPlayer); // khung 5
+	sprites->Add(99002, 3, 21 , 11, 29, texPlayer);		// banh xe 1
+	sprites->Add(99003, 12, 21, 20, 29, texPlayer);		// banh xe 2
+	sprites->Add(99004, 21, 21, 29, 29, texPlayer);		// banh xe 3
+	sprites->Add(99005, 30, 21, 38, 29, texPlayer);		// banh xe 4
+
+	sprites->Add(99006, 3, 3, 11, 11, texPlayer);		// sung 1
+	sprites->Add(99007, 12, 3, 20, 11, texPlayer);		// sung 2
+	sprites->Add(99008, 21, 3, 29, 11, texPlayer);		// sung 3
+	sprites->Add(99009, 30, 3, 38, 11, texPlayer);		// sung 4
+
+	sprites->Add(99010, 39, 3, 55, 11, texPlayer);		// khung 1
+	sprites->Add(99011, 56, 3, 72, 11, texPlayer);		// khung 2
+
+	sprites->Add(99012, 73 , 3, 89, 19, texPlayer);		// khung 3
+	sprites->Add(99013, 90, 3, 98, 19, texPlayer);		// khung 4
+	sprites->Add(99014, 99, 3, 107, 19, texPlayer);		// khung 5
+	sprites->Add(99015, 108, 3, 124, 19, texPlayer);	// khung 5
 
 	// enemyball
 
@@ -297,21 +305,52 @@ void LoadResources()
 	ani->Add(99001);
 	animations->Add(1001, ani);
 
-	ani = new CAnimation(200);		// sophia banh xe
+	ani = new CAnimation(200);		// sophia banh xe trc chay
 	ani->Add(99002);
-	animations->Add(1002, ani);
+	ani->Add(99003);
+	ani->Add(99004);
+	ani->Add(99005);
+	animations->Add(1201, ani);
 
-	ani = new CAnimation(200);		// 
+	ani = new CAnimation(200);		// sophia banh xe trc di 
+	ani->Add(99002);
+	ani->Add(99003);
+	animations->Add(1202, ani);
+
+	ani = new CAnimation(200);		// sophia banh xe sau chay
+	ani->Add(99005);
+	ani->Add(99002);
+	ani->Add(99003);
+	ani->Add(99004);
+	animations->Add(1211, ani);
+
+	ani = new CAnimation(200);		// sophia banh xe sau di
+	ani->Add(99005);
+	ani->Add(99002);
+	animations->Add(1212, ani);
+
+	ani = new CAnimation(200);
 	ani->Add(99003);
 	animations->Add(1003, ani);
 
 	ani = new CAnimation(200);		// sophia gun
-	ani->Add(99006);
+	ani->Add(99007);
 	animations->Add(1004, ani);
 
 	ani = new CAnimation(200);		// sophia body
 	ani->Add(99010);
 	animations->Add(1005, ani);
+
+	ani = new CAnimation(200);		// sophia bullet
+	ani->Add(98001);
+	animations->Add(2001, ani);
+
+	ani = new CAnimation(100);		// sophia bullet explore
+	ani->Add(98005);
+	ani->Add(98006);
+	ani->Add(98007);
+	ani->Add(98006);
+	animations->Add(2002, ani);
 
 	ani = new CAnimation(1000);		// Goomba dead
 	ani->Add(30003);
@@ -323,63 +362,68 @@ void LoadResources()
 	objects.push_back(map);
 
 	mario = new CMario();
-	mario->AddAnimation(400);		// idle right big
-	mario->AddAnimation(401);		// idle left big
-	mario->AddAnimation(402);		// idle right small
-	mario->AddAnimation(403);		// idle left small
+	//than duoi
+	mario->AddAnimation(1001);
+	//banh trc
+	mario->AddAnimation(1201);
+	//banh sau
+	mario->AddAnimation(1211);
+	//gun
+	mario->AddAnimation(1004);
+	//body
+	mario->AddAnimation(1005);
 
-	mario->AddAnimation(500);		// walk right big
-	mario->AddAnimation(501);		// walk left big
-	mario->AddAnimation(502);		// walk right small
-	mario->AddAnimation(503);		// walk left big
+	//mario->AddAnimation(400);		// idle right big
+	//mario->AddAnimation(401);		// idle left big
+	//mario->AddAnimation(402);		// idle right small
+	//mario->AddAnimation(403);		// idle left small
 
-	mario->AddAnimation(599);		// die
+	//mario->AddAnimation(500);		// walk right big
+	//mario->AddAnimation(501);		// walk left big
+	//mario->AddAnimation(502);		// walk right small
+	//mario->AddAnimation(503);		// walk left big
+
+	//mario->AddAnimation(599);		// die
 
 	mario->SetPosition(50.0f, 0);
 
 	objects.push_back(mario);
 
-	//for (int i = 0; i < 5; i++)
-	//{
-	//	CBrick *brick = new CBrick();
-	//	brick->AddAnimation(601);
-	//	brick->SetPosition(100.0f + i*60.0f, 74.0f);
-	//	objects.push_back(brick);
-
-	//	brick = new CBrick();
-	//	brick->AddAnimation(601);
-	//	brick->SetPosition(100.0f + i*60.0f, 90.0f);
-	//	objects.push_back(brick);
-
-	//	brick = new CBrick();
-	//	brick->AddAnimation(601);
-	//	brick->SetPosition(84.0f + i*60.0f, 90.0f);
-	//	objects.push_back(brick);
-	//}
 
 
 
-	for (int i = 0; i < 30; i++)
-	{
-		CBrick *brick = new CBrick();
-		brick->AddAnimation(601);
-		brick->SetPosition(0 + i*16.0f, 150);
-		objects.push_back(brick);
-	}
+	brick = new CBrick(30);
+	brick->AddAnimation(601);
+	brick->SetPosition(0 , 145);
+	objects.push_back(brick);
+
+	brick = new CBrick(5, false);
+	brick->AddAnimation(601);
+	brick->SetPosition(90.0f, 145 - 16.0f * 5);
+	objects.push_back(brick);
 
 	BatTrap *batTrap = new BatTrap();
 	batTrap->AddAnimation(801);
-	batTrap->SetPosition(70.0f, 30.0f);
+	batTrap->SetPosition(70.0f, 100.0f);
 	objects.push_back(batTrap);
 
-	Sophia *sophia = new Sophia();
-	sophia->AddAnimation(1001);
-	sophia->AddAnimation(1002);
-	sophia->AddAnimation(1003);
-	sophia->AddAnimation(1004);
-	sophia->AddAnimation(1005);
-	sophia->SetPosition(100.0f, 30.0f);
-	objects.push_back(sophia);
+	//Sophia *sophia = new Sophia();
+	//sophia->AddAnimation(1001);
+	//sophia->AddAnimation(1002);
+	//sophia->AddAnimation(1003);
+	//sophia->AddAnimation(1004);
+	//sophia->AddAnimation(1005);
+	//sophia->SetPosition(100.0f, 30.0f);
+	//objects.push_back(sophia);
+
+
+	CBullet *bullet = new CBullet();
+	bullet->AddAnimation(2001);
+	bullet->AddAnimation(2002);
+	bullet->SetPosition(150.0f, 30.0f);
+	bullet->SetState(BULLET_STATE_WALKING);
+	objects.push_back(bullet);
+
 
 	EnemyBall *enemyBall = new EnemyBall();
 	enemyBall->AddAnimation(901);
@@ -412,6 +456,7 @@ void Update(DWORD dt)
 	// TO-DO: This is a "dirty" way, need a more organized way 
 
 	vector<LPGAMEOBJECT> coObjects;
+
 	for (int i = 1; i < objects.size(); i++)
 	{
 		coObjects.push_back(objects[i]);
