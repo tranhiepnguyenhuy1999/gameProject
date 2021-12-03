@@ -141,6 +141,7 @@
     <ClInclude Include="Goomba.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Mario.h" />
+    <ClInclude Include="Quadtree.h" />
     <ClInclude Include="Rect.h" />
     <ClInclude Include="ScreenManager.h" />
     <ClInclude Include="ShipE.h" />
@@ -162,6 +163,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Mario.cpp" />
+    <ClCompile Include="Quadtree.cpp" />
     <ClCompile Include="Rect.cpp" />
     <ClCompile Include="ScreenManager.cpp" />
     <ClCompile Include="ShipE.cpp" />
