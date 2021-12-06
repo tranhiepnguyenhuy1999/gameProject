@@ -161,9 +161,8 @@ void CMario::SetState(int state)
 		break;
 	case SOPHIA_STATE_JUMP:
 		vy = -MARIO_JUMP_SPEED_Y;
-
 	case SOPHIA_STATE_WALKING_DOWN:
-		vy = -MARIO_JUMP_SPEED_Y;
+		vy = MARIO_JUMP_SPEED_Y;
 	case SOPHIA_STATE_IDLE:
 		vx = 0;
 		break;

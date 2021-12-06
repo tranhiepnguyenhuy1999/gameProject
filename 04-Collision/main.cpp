@@ -477,7 +477,7 @@ void Update(DWORD dt)
 
 	mario->GetPosition(cx, cy);
 
-	ScreenManager::GetInstance()->setScreenManagerPosition(cx, 0.0f);
+	ScreenManager::GetInstance()->setScreenManagerPosition(cx, cy);
 	//CGame::GetInstance()->SetCamPos(cx, 0.0f /*cy*/);
 
 }
