@@ -483,9 +483,9 @@ void Update(DWORD dt)
 
 	ScreenManager::GetInstance()->getScreenManagerPosition(sX, sY);
 
-	if (cx - sX < 40) ScreenManager::GetInstance()->setScreenManagerPosition(cx - 40, cy - 20);
+	if (cx - sX < 40) ScreenManager::GetInstance()->setScreenManagerPosition(cx - 40, cy - 50);
 	
-	if (cx + 24 - sX >= SCREEN_WIDTH - 40 ) ScreenManager::GetInstance()->setScreenManagerPosition( sX + 40 - 24 , cy - 20);
+	if (cx - sX >= SCREEN_WIDTH - 40 - 24 ) ScreenManager::GetInstance()->setScreenManagerPosition( sX + 40 + 24 + (cx - (sX + SCREEN_WIDTH) ) , cy - 50);
 
 
 	//CGame::GetInstance()->SetCamPos(cx, 0.0f /*cy*/);
