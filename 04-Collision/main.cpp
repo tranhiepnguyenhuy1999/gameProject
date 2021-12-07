@@ -103,6 +103,8 @@ void CSampleKeyHander::KeyState(BYTE *states)
 		mario->SetState(SOPHIA_STATE_WALKING_LEFT);
 	else if (game->IsKeyDown(DIK_DOWN))
 		mario->SetState(SOPHIA_STATE_WALKING_DOWN);
+	else if (game->IsKeyDown(DIK_UP))
+		mario->SetState(SOPHIA_STATE_JUMP);
 	else
 		mario->SetState(SOPHIA_STATE_IDLE);
 }
@@ -144,7 +146,7 @@ void LoadResources()
 
 	// map 
 	LPDIRECT3DTEXTURE9 texMap = textures->Get(ID_TEX_MAP);
-	sprites->Add(00001, 0, 0, 2048, 2048, texMap);
+	sprites->Add(00001, 0, 0, 2048, 782, texMap);
 	
 	LPDIRECT3DTEXTURE9 texMario = textures->Get(ID_TEX_MARIO);
 
@@ -475,9 +477,17 @@ void Update(DWORD dt)
 
 	float cx, cy;
 
+	float sX, sY;
+
 	mario->GetPosition(cx, cy);
 
-	ScreenManager::GetInstance()->setScreenManagerPosition(cx, cy);
+	ScreenManager::GetInstance()->getScreenManagerPosition(sX, sY);
+
+	if (cx - sX < 40) ScreenManager::GetInstance()->setScreenManagerPosition(cx - 40, cy - 20);
+	
+	if (cx + 24 - sX >= SCREEN_WIDTH - 40 ) ScreenManager::GetInstance()->setScreenManagerPosition( sX + 40 - 24 , cy - 20);
+
+
 	//CGame::GetInstance()->SetCamPos(cx, 0.0f /*cy*/);
 
 }

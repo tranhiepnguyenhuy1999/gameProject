@@ -11,11 +11,6 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 	// Calculate dx, dy 
 	CGameObject::Update(dt);
 
-	// Simple fall down
-	if (state == SOPHIA_STATE_WALKING_DOWN) 
-		vy += MARIO_GRAVITY*dt;
-
-
 	vector<LPCOLLISIONEVENT> coEvents;
 	vector<LPCOLLISIONEVENT> coEventsResult;
 
@@ -161,14 +156,17 @@ void CMario::SetState(int state)
 		break;
 	case SOPHIA_STATE_JUMP:
 		vy = -MARIO_JUMP_SPEED_Y;
+		break;
 	case SOPHIA_STATE_WALKING_DOWN:
 		vy = MARIO_JUMP_SPEED_Y;
+		break;
 	case SOPHIA_STATE_IDLE:
 		vx = 0;
+		vy = 0;
 		break;
-	case SOPHIA_STATE_DIE:
-		vy = -MARIO_DIE_DEFLECT_SPEED;
-		break;
+	//case SOPHIA_STATE_DIE:
+	//	vy = -MARIO_DIE_DEFLECT_SPEED;
+	//	break;
 	}
 }
 
