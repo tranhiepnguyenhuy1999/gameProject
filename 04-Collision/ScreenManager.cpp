@@ -11,7 +11,7 @@ D3DXVECTOR3 ScreenManager::transformPosition(float x, float y)
 {
 
 	int xx = (x - xS);
-	int yy = (y - yS);
+	int yy = (yS - y);
 	
 	D3DXVECTOR3 p(xx, yy, 0);
 	return p;

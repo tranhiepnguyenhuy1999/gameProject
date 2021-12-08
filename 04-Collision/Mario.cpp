@@ -21,13 +21,15 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 		CalcPotentialCollisions(coObjects, coEvents);
 
 	// reset untouchable timer if untouchable time has passed
-	if ( GetTickCount() - untouchable_start > MARIO_UNTOUCHABLE_TIME) 
-	{
-		untouchable_start = 0;
-		untouchable = 0;
-	}
+
+	//if ( GetTickCount() - untouchable_start > MARIO_UNTOUCHABLE_TIME) 
+	//{
+	//	untouchable_start = 0;
+	//	untouchable = 0;
+	//}
 
 	// No collision occured, proceed normally
+
 	if (coEvents.size()==0)
 	{
 		x += dx; 
@@ -103,8 +105,8 @@ void CMario::Render()
 	if (state == SOPHIA_STATE_DIE)
 		ani = MARIO_ANI_DIE;
 	else
-	if (level == MARIO_LEVEL_BIG)
-	{
+	//if (level == MARIO_LEVEL_BIG)
+	//{
 		if (vx == 0)
 			{
 				if (nx>0) ani = MARIO_ANI_BIG_IDLE_RIGHT;
@@ -113,28 +115,28 @@ void CMario::Render()
 		else if (vx > 0) 
 			ani = MARIO_ANI_BIG_WALKING_RIGHT; 
 		else ani = MARIO_ANI_BIG_WALKING_LEFT;
-	}
-	else if (level == MARIO_LEVEL_SMALL)
-	{
-		if (vx == 0)
-		{
-			if (nx>0) ani = MARIO_ANI_SMALL_IDLE_RIGHT;
-			else ani = MARIO_ANI_SMALL_IDLE_LEFT;
-		}
-		else if (vx > 0)
-			ani = MARIO_ANI_SMALL_WALKING_RIGHT;
-		else ani = MARIO_ANI_SMALL_WALKING_LEFT;
-	}
+	//}
+	//else if (level == MARIO_LEVEL_SMALL)
+	//{
+	//	if (vx == 0)
+	//	{
+	//		if (nx>0) ani = MARIO_ANI_SMALL_IDLE_RIGHT;
+	//		else ani = MARIO_ANI_SMALL_IDLE_LEFT;
+	//	}
+	//	else if (vx > 0)
+	//		ani = MARIO_ANI_SMALL_WALKING_RIGHT;
+	//	else ani = MARIO_ANI_SMALL_WALKING_LEFT;
+	//}
 
 	int alpha = 255;
 	if (untouchable) alpha = 128;
 
 	/*animations[ani]->Render(x, y, alpha);*/
 
-	animations[center]->Render(x + 8, y + 8);
-	animations[font_wheel]->Render(x, y + 8);
-	animations[back_wheel]->Render(x +16 , y +8);
-	animations[gun]->Render(x +16, y);
+	animations[center]->Render(x + 8, y - 8);
+	animations[font_wheel]->Render(x, y - 8);
+	animations[back_wheel]->Render(x + 16 , y - 8);
+	animations[gun]->Render(x + 16, y);
 	animations[body]->Render(x, y);
 
 	RenderBoundingBox();
@@ -155,18 +157,18 @@ void CMario::SetState(int state)
 		nx = -1;
 		break;
 	case SOPHIA_STATE_JUMP:
-		vy = -MARIO_JUMP_SPEED_Y;
+		vy = MARIO_JUMP_SPEED_Y;
 		break;
 	case SOPHIA_STATE_WALKING_DOWN:
-		vy = MARIO_JUMP_SPEED_Y;
+		vy = -MARIO_JUMP_SPEED_Y;
 		break;
 	case SOPHIA_STATE_IDLE:
 		vx = 0;
 		vy = 0;
 		break;
-	//case SOPHIA_STATE_DIE:
-	//	vy = -MARIO_DIE_DEFLECT_SPEED;
-	//	break;
+	case SOPHIA_STATE_DIE:
+		vy = -MARIO_DIE_DEFLECT_SPEED;
+		break;
 	}
 }
 

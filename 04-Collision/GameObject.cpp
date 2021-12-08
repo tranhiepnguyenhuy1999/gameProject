@@ -88,6 +88,7 @@ void CGameObject::FilterCollision(
 {
 	min_tx = 1.0f;
 	min_ty = 1.0f;
+
 	int min_ix = -1;
 	int min_iy = -1;
 

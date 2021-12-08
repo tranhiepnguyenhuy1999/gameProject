@@ -52,7 +52,7 @@
 #define ID_TEX_NES_ENEMY 30
 #define ID_TEX_MAP 40
 #define ID_TEX_PLAYER 50
-
+#define ID_TEX_BRICK 60
 CGame *game;
 
 CMario *mario;
@@ -133,6 +133,7 @@ void LoadResources()
 	CTextures * textures = CTextures::GetInstance();
 
 	textures->Add(ID_TEX_MAP, L"textures\\level3-side.png", D3DCOLOR_XRGB(255, 255, 255));
+	textures->Add(ID_TEX_BRICK, L"textures\\brick.png", D3DCOLOR_XRGB(255, 255, 255));
 	textures->Add(ID_TEX_PLAYER, L"textures\\player.png", D3DCOLOR_XRGB(0, 57, 115));
 	textures->Add(ID_TEX_MARIO, L"textures\\mario.png",D3DCOLOR_XRGB(255, 255, 255));
 	textures->Add(ID_TEX_MISC, L"textures\\misc.png", D3DCOLOR_XRGB(176, 224, 248));
@@ -146,7 +147,7 @@ void LoadResources()
 
 	// map 
 	LPDIRECT3DTEXTURE9 texMap = textures->Get(ID_TEX_MAP);
-	sprites->Add(00001, 0, 0, 2048, 782, texMap);
+	sprites->Add(00001, 0, 0, 1551, 780, texMap);
 	
 	LPDIRECT3DTEXTURE9 texMario = textures->Get(ID_TEX_MARIO);
 
@@ -170,10 +171,11 @@ void LoadResources()
 	sprites->Add(10031, 187, 0, 198, 15, texMario);			// idle small left
 
 	sprites->Add(10032, 155, 0, 170, 15, texMario);			// walk
-	sprites->Add(10033, 125, 0, 139, 15, texMario);			// 
-
+	sprites->Add(10033, 125, 0, 139, 15, texMario);	
+		// 
+	LPDIRECT3DTEXTURE9 texBrick = textures->Get(ID_TEX_BRICK);
 	//brick
-	sprites->Add(20001, 128, 64, 144, 80, texMap);
+	sprites->Add(20001, 0, 0, 16, 16, texBrick);
 
 
 	//LPDIRECT3DTEXTURE9 texEnemy = textures->Get(ID_TEX_ENEMY);
@@ -363,7 +365,7 @@ void LoadResources()
 
 	Map *map = new Map();			//Map
 	map->AddAnimation(001);
-	map->SetPosition(0, 0);
+	map->SetPosition(0,0);
 	objects.push_back(map);
 
 	mario = new CMario();
@@ -390,7 +392,7 @@ void LoadResources()
 
 	//mario->AddAnimation(599);		// die
 
-	mario->SetPosition(50.0f, 50.0f);
+	mario->SetPosition(50.0f, 0.0f);
 
 	objects.push_back(mario);
 
@@ -437,6 +439,7 @@ void LoadResources()
 	enemyBall->SetState(ENEMYBALL_STATE_WALKING);
 	objects.push_back(enemyBall);
 
+	ScreenManager::GetInstance()->setScreenManagerPosition(0, SCREEN_HEIGHT);
 	// and Goombas 
 
 	//for (int i = 0; i < 4; i++)
@@ -477,19 +480,35 @@ void Update(DWORD dt)
 
 	float cx, cy;
 
-	float sX, sY;
+	float sX, sY, changeX, changeY;
 
 	mario->GetPosition(cx, cy);
 
 	ScreenManager::GetInstance()->getScreenManagerPosition(sX, sY);
 
-	if (cx - sX < 40) ScreenManager::GetInstance()->setScreenManagerPosition(cx - 40, cy - 50);
+	int isChangeScreen = 0;
+	changeX = sX;
+	changeY = sY;
+	if (cx - sX < 40) { changeX = cx - 40; isChangeScreen = 1; }
 	
-	if (cx - sX >= SCREEN_WIDTH - 40 - 24 ) ScreenManager::GetInstance()->setScreenManagerPosition( sX + 40 + 24 + (cx - (sX + SCREEN_WIDTH) ) , cy - 50);
+	if (cx - sX >= SCREEN_WIDTH - 40 - 24) 
+	{ 
+		changeX = sX + 40 + 24 + (cx - (sX + SCREEN_WIDTH));
+		isChangeScreen = 1;
+	}
 
+	if (sY - cy < 40) { changeY = cy + 40; isChangeScreen = 1; }
 
-	//CGame::GetInstance()->SetCamPos(cx, 0.0f /*cy*/);
-
+	if (sY - (cy - 16) >= SCREEN_HEIGHT - 40 )
+	{
+		changeY = sY - 40 - 16 - (sY - ( SCREEN_HEIGHT - 40 - 16 ) - cy - 16 );
+		isChangeScreen = 1;
+	}
+	
+	if (isChangeScreen == 1)
+	{
+		ScreenManager::GetInstance()->setScreenManagerPosition(changeX, changeY);
+	}
 }
 
 /*
