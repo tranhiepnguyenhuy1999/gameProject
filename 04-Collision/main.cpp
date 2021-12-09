@@ -365,7 +365,7 @@ void LoadResources()
 
 	Map *map = new Map();			//Map
 	map->AddAnimation(001);
-	map->SetPosition(0,0);
+	map->SetPosition(0, 780.f);
 	objects.push_back(map);
 
 	mario = new CMario();
@@ -392,7 +392,7 @@ void LoadResources()
 
 	//mario->AddAnimation(599);		// die
 
-	mario->SetPosition(50.0f, 0.0f);
+	mario->SetPosition(1400.0f, 750.0f);
 
 	objects.push_back(mario);
 
@@ -439,7 +439,11 @@ void LoadResources()
 	enemyBall->SetState(ENEMYBALL_STATE_WALKING);
 	objects.push_back(enemyBall);
 
-	ScreenManager::GetInstance()->setScreenManagerPosition(0, SCREEN_HEIGHT);
+	float cx, cy;
+
+	mario->GetPosition(cx, cy);
+
+	ScreenManager::GetInstance()->setScreenManagerPosition(cx - SCREEN_WIDTH/2, SCREEN_HEIGHT);
 	// and Goombas 
 
 	//for (int i = 0; i < 4; i++)
