@@ -152,6 +152,7 @@
   <ItemGroup>
     <ClCompile Include="BatTrap.cpp" />
     <ClCompile Include="BoomE.cpp" />
+    <ClCompile Include="BoomHeadE.cpp" />
     <ClCompile Include="Brick.cpp" />
     <ClCompile Include="BugE.cpp" />
     <ClCompile Include="Bullet.cpp" />
