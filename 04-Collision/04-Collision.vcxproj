@@ -135,6 +135,8 @@
     <ClInclude Include="BugE.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="debug.h" />
+    <ClInclude Include="Enemy01.h" />
+    <ClInclude Include="Enemy02.h" />
     <ClInclude Include="EnemyBall.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
@@ -157,6 +159,8 @@
     <ClCompile Include="BugE.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="debug.cpp" />
+    <ClCompile Include="Enemy01.cpp" />
+    <ClCompile Include="Enemy02.cpp" />
     <ClCompile Include="EnemyBall.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />

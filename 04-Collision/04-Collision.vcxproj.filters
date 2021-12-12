@@ -72,6 +72,12 @@
     <ClInclude Include="Quadtree.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Enemy01.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy02.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="debug.cpp">
@@ -135,6 +141,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="BoomHeadE.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy01.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy02.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
