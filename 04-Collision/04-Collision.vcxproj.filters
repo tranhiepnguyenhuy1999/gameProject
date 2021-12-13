@@ -78,6 +78,9 @@
     <ClInclude Include="Enemy02.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Brick2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="debug.cpp">
@@ -147,6 +150,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Enemy02.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Brick2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

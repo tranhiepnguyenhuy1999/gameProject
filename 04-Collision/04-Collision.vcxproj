@@ -132,6 +132,7 @@
     <ClInclude Include="BatTrap.h" />
     <ClInclude Include="BoomE.h" />
     <ClInclude Include="Brick.h" />
+    <ClInclude Include="Brick2.h" />
     <ClInclude Include="BugE.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="debug.h" />
@@ -156,6 +157,7 @@
     <ClCompile Include="BoomE.cpp" />
     <ClCompile Include="BoomHeadE.cpp" />
     <ClCompile Include="Brick.cpp" />
+    <ClCompile Include="Brick2.cpp" />
     <ClCompile Include="BugE.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="debug.cpp" />
