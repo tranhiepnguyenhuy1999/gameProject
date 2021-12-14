@@ -180,6 +180,7 @@ void CMario::GetBoundingBox(float &left, float &top, float &right, float &bottom
 	if (level==MARIO_LEVEL_BIG)
 	{
 		right = x + SOPHIA_BIG_BBOX_WIDTH;
+
 		bottom = y + SOPHIA_BIG_BBOX_HEIGHT;
 	}
 	else

@@ -36,6 +36,7 @@
 #include "Map.h"
 #include "Sophia.h"
 #include "Bullet.h"
+#include "Brick2.h"
 
 #define WINDOW_CLASS_NAME L"SampleWindow"
 #define MAIN_WINDOW_TITLE L"04 - Collision"
@@ -53,11 +54,13 @@
 #define ID_TEX_MAP 40
 #define ID_TEX_PLAYER 50
 #define ID_TEX_BRICK 60
+#define ID_TEX_BRICK2 70
 CGame *game;
 
 CMario *mario;
 CGoomba *goomba;
 CBrick *brick;
+CBrick2 *brick2;
 
 vector<LPGAMEOBJECT> objects;
 
@@ -133,7 +136,10 @@ void LoadResources()
 	CTextures * textures = CTextures::GetInstance();
 
 	textures->Add(ID_TEX_MAP, L"textures\\level3-side.png", D3DCOLOR_XRGB(255, 255, 255));
+	//brick
 	textures->Add(ID_TEX_BRICK, L"textures\\brick.png", D3DCOLOR_XRGB(255, 255, 255));
+	textures->Add(ID_TEX_BRICK2, L"textures\\brick-1.png", D3DCOLOR_XRGB(255, 255, 255));
+
 	textures->Add(ID_TEX_PLAYER, L"textures\\player.png", D3DCOLOR_XRGB(0, 57, 115));
 	textures->Add(ID_TEX_MARIO, L"textures\\mario.png",D3DCOLOR_XRGB(255, 255, 255));
 	textures->Add(ID_TEX_MISC, L"textures\\misc.png", D3DCOLOR_XRGB(176, 224, 248));
@@ -172,10 +178,14 @@ void LoadResources()
 
 	sprites->Add(10032, 155, 0, 170, 15, texMario);			// walk
 	sprites->Add(10033, 125, 0, 139, 15, texMario);	
-		// 
-	LPDIRECT3DTEXTURE9 texBrick = textures->Get(ID_TEX_BRICK);
+	
 	//brick
+	LPDIRECT3DTEXTURE9 texBrick = textures->Get(ID_TEX_BRICK);
 	sprites->Add(20001, 0, 0, 16, 16, texBrick);
+
+	//brick2
+	LPDIRECT3DTEXTURE9 texBrick2 = textures->Get(ID_TEX_BRICK2);
+	sprites->Add(20002, 0, 0, 32, 32, texBrick2);
 
 
 	//LPDIRECT3DTEXTURE9 texEnemy = textures->Get(ID_TEX_ENEMY);
@@ -281,6 +291,10 @@ void LoadResources()
 	ani = new CAnimation(100);		// brick
 	ani->Add(20001);
 	animations->Add(601, ani);
+
+	ani = new CAnimation(100);		// brick2
+	ani->Add(20002);
+	animations->Add(602, ani);
 
 	ani = new CAnimation(100);		// map
 	ani->Add(00001);
@@ -392,11 +406,10 @@ void LoadResources()
 
 	//mario->AddAnimation(599);		// die
 
-	mario->SetPosition(1400.0f, 750.0f);
+	//mario->SetPosition(1400.0f, 750.0f);
+	mario->SetPosition(50.0f, 250.0f);
 
 	objects.push_back(mario);
-
-
 
 
 	brick = new CBrick(30);
@@ -408,6 +421,16 @@ void LoadResources()
 	brick->AddAnimation(601);
 	brick->SetPosition(90.0f, 145 - 16.0f * 5);
 	objects.push_back(brick);
+
+	brick2 = new CBrick2(3);
+	brick2->AddAnimation(602);
+	brick2->SetPosition(834.0f, 380.0f);
+	objects.push_back(brick2);
+
+	brick2 = new CBrick2(4);
+	brick2->AddAnimation(602);
+	brick2->SetPosition(818.0f, 348.0f);
+	objects.push_back(brick2);
 
 	BatTrap *batTrap = new BatTrap();
 	batTrap->AddAnimation(801);
@@ -435,7 +458,7 @@ void LoadResources()
 	EnemyBall *enemyBall = new EnemyBall();
 	enemyBall->AddAnimation(901);
 	enemyBall->AddAnimation(902);
-	enemyBall->SetPosition(0, 30.0f);
+	enemyBall->SetPosition(40.0f, 250.0f);
 	enemyBall->SetState(ENEMYBALL_STATE_WALKING);
 	objects.push_back(enemyBall);
 
