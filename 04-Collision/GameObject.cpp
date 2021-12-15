@@ -1,4 +1,4 @@
-#include <d3dx9.h>
+﻿#include <d3dx9.h>
 #include <algorithm>
 
 
@@ -30,15 +30,18 @@ LPCOLLISIONEVENT CGameObject::SweptAABBEx(LPGAMEOBJECT coO)
 	float sl, st, sr, sb;		// static object bbox
 	float ml, mt, mr, mb;		// moving object bbox
 	float t, nx, ny;
-
+	
+	// lay kich thuoc enemy
 	coO->GetBoundingBox(sl, st, sr, sb);
 
 	// deal with moving object: m speed = original m speed - collide object speed
-	float svx, svy;
+	float svx, svy; 
 	coO->GetSpeed(svx, svy);
 
+	// quan duong di duoc của object
 	float sdx = svx*dt;
 	float sdy = svy*dt;
+
 
 	float dx = this->dx - sdx;
 	float dy = this->dy - sdy;
@@ -54,6 +57,7 @@ LPCOLLISIONEVENT CGameObject::SweptAABBEx(LPGAMEOBJECT coO)
 	);
 
 	CCollisionEvent * e = new CCollisionEvent(t, nx, ny, coO);
+
 	return e;
 }
 
@@ -97,21 +101,25 @@ void CGameObject::FilterCollision(
 
 	coEventsResult.clear();
 
+	// het giai doan khoi tao
+
 	for (UINT i = 0; i < coEvents.size(); i++)
 	{
 		LPCOLLISIONEVENT c = coEvents[i];
 
+		// xac dinh object va cham gan nhat x
 		if (c->t < min_tx && c->nx != 0) {
 			min_tx = c->t; nx = c->nx; min_ix = i;
 		}
 
-		if (c->t < min_ty  && c->ny != 0) {
+		// xac dinh object va cham gan nhat theo y
+		if (c->t < min_ty  && c->ny != 0) {	
 			min_ty = c->t; ny = c->ny; min_iy = i;
 		}
 	}
 
-	if (min_ix>=0) coEventsResult.push_back(coEvents[min_ix]);
-	if (min_iy>=0) coEventsResult.push_back(coEvents[min_iy]);
+	if (min_ix >=0) coEventsResult.push_back(coEvents[min_ix]);
+	if (min_iy >=0) coEventsResult.push_back(coEvents[min_iy]);
 }
 
 
@@ -128,7 +136,7 @@ void CGameObject::RenderBoundingBox()
 	rect.left = 0;
 	rect.top = 0;
 	rect.right = (int)r - (int)l;
-	rect.bottom = (int)b - (int)t;
+	rect.bottom = (int)t - (int)b;
 
 	CGame::GetInstance()->Draw(x, y, bbox, rect.left, rect.top, rect.right, rect.bottom, 32);
 }

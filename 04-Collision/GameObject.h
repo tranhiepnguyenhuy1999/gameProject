@@ -20,6 +20,7 @@ typedef CCollisionEvent * LPCOLLISIONEVENT;
 struct CCollisionEvent
 {
 	LPGAMEOBJECT obj;
+	// t la tg xay ra va cham
 	float t, nx, ny;
 	CCollisionEvent(float t, float nx, float ny, LPGAMEOBJECT obj = NULL) { this->t = t; this->nx = nx; this->ny = ny; this->obj = obj; }
 

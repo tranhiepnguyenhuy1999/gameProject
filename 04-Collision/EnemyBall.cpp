@@ -36,7 +36,7 @@ void EnemyBall::Render()
 	}
 
 	animations[ani]->Render(x, y);
-	//RenderBoundingBox();
+	RenderBoundingBox();
 }
 
 void EnemyBall::SetState(int state)

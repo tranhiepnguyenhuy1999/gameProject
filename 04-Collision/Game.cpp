@@ -229,6 +229,7 @@ void CGame::SweptAABB(
 	float br = dx > 0 ? mr + dx : mr;
 	float bb = dy > 0 ? mb + dy : mb;
 
+	// khong co kha nang va cham do chua cham nhau
 	if (br < sl || bl > sr || bb < st || bt > sb) return;
 
 
@@ -277,7 +278,7 @@ void CGame::SweptAABB(
 	{
 		ty_entry = dy_entry / dy;
 		ty_exit = dy_exit / dy;
-	}
+	}	
 	
 
 	if (  (tx_entry < 0.0f && ty_entry < 0.0f) || tx_entry > 1.0f || ty_entry > 1.0f) return;
